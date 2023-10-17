@@ -1,9 +1,11 @@
-import { Container, Text } from './styles';
+import { Container } from './styles';
+
+import { Header } from '@components/Header';
 
 export default function Teams() {
   return (
     <Container>
-      <Text>Home - Screen</Text>
+      <Header />
     </Container>
   );
 }
