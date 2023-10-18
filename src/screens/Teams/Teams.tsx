@@ -6,6 +6,7 @@ import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { ListEmptyItem } from '@components/ListEmptyItem';
 import { TeamCard } from '@components/TeamCard';
+import { Button } from '@components/Button';
 
 import { Container } from './styles';
 
@@ -28,6 +29,8 @@ export default function Teams() {
           <ListEmptyItem message="How about registering the first team?" />
         )}
       />
+
+      <Button>Create New Team</Button>
     </Container>
   );
 }
