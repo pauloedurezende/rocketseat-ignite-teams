@@ -5,6 +5,7 @@ import { Team } from '@types';
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { ListEmptyItem } from '@components/ListEmptyItem';
+import { TeamCard } from '@components/TeamCard';
 
 import { Container } from './styles';
 
@@ -22,7 +23,7 @@ export default function Teams() {
         keyExtractor={(data) => data.id}
         contentContainerStyle={teams.length === 0 && { flex: 1 }}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <Text key={item.id}>{item.name}</Text>}
+        renderItem={({ item }) => <TeamCard key={item.id} name={item.name} />}
         ListEmptyComponent={() => (
           <ListEmptyItem message="How about registering the first team?" />
         )}
