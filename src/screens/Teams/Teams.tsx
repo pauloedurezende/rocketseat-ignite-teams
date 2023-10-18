@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { Team } from '@types';
 import { Header } from '@components/Header';
@@ -12,6 +13,8 @@ import { Container } from './styles';
 
 export default function Teams() {
   const [teams, setTeams] = useState<Team[]>([]);
+
+  const { navigate } = useNavigation();
 
   return (
     <Container>
@@ -30,7 +33,7 @@ export default function Teams() {
         )}
       />
 
-      <Button>Create New Team</Button>
+      <Button onPress={() => navigate('create')}>Create New Team</Button>
     </Container>
   );
 }
