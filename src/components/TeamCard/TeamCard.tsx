@@ -6,9 +6,9 @@ type TeamCardProps = TouchableOpacityProps & {
   name: string;
 };
 
-export default function TeamCard({ name }: TeamCardProps) {
+export default function TeamCard({ name, ...rest }: TeamCardProps) {
   return (
-    <Container>
+    <Container {...rest}>
       <Icon />
       <Name>{name}</Name>
     </Container>
