@@ -1,6 +1,7 @@
 interface NavigationParams {
   teams: undefined;
   create: undefined;
+  players: {};
 }
 
 export declare global {
