@@ -1,11 +1,7 @@
-interface NavigationParams {
-  teams: undefined;
-  create: undefined;
-  players: {};
-}
+import { RootStackParamList } from '@types';
 
 export declare global {
   namespace ReactNavigation {
-    interface RootParamList extends NavigationParams {}
+    interface RootParamList extends RootStackParamList {}
   }
 }
