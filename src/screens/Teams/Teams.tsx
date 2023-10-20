@@ -46,7 +46,13 @@ export default function Teams() {
         keyExtractor={(data) => data.id}
         contentContainerStyle={availableTeams.length === 0 && { flex: 1 }}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <TeamCard key={item.id} name={item.name} />}
+        renderItem={({ item }) => (
+          <TeamCard
+            key={item.id}
+            name={item.name}
+            onPress={() => navigate('players', {})}
+          />
+        )}
         ListEmptyComponent={() => (
           <ListEmptyItem message="How about registering the first team?" />
         )}
