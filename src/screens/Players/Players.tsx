@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { FlatList } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { Alert, FlatList } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import type { RouteProp } from '@react-navigation/native';
 
 import { Player, RootStackParamList, TeamSide } from '@types';
+import { teams } from '@storage/teams';
 
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
@@ -25,6 +26,25 @@ export default function Players() {
   const {
     params: { team },
   } = useRoute<PlayersScreenRouteProps>();
+  const { navigate } = useNavigation();
+
+  async function removeCurrentTeamAndNavigate() {
+    try {
+      await teams.remove(team.id);
+
+      navigate('teams');
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while removing the team');
+      console.error(error);
+    }
+  }
+
+  function handleRemoveTeam() {
+    Alert.alert('Atention', 'Are you sure you want to remove this team?', [
+      { text: 'No', style: 'cancel' },
+      { text: 'Yes', onPress: removeCurrentTeamAndNavigate },
+    ]);
+  }
 
   return (
     <Container>
@@ -77,7 +97,7 @@ export default function Players() {
         ]}
       />
 
-      <Button type="secondary" onPress={() => {}}>
+      <Button type="secondary" onPress={handleRemoveTeam}>
         Remove Team
       </Button>
     </Container>
