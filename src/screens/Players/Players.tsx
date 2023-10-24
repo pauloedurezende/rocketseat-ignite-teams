@@ -6,8 +6,10 @@ import { RootStackParamList } from '@types';
 
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
+import { Input } from '@components/Input';
+import { ButtonIcon } from '@components/ButtonIcon';
 
-import { Container } from './styles';
+import { Container, Form } from './styles';
 
 type PlayersScreenRouteProps = RouteProp<RootStackParamList, 'players'>;
 
@@ -24,6 +26,15 @@ export default function Players() {
         title={team?.name}
         subtitle="Add your friends and separate between teams"
       />
+
+      <Form>
+        <Input
+          autoCorrect={false}
+          placeholder="Player Name"
+          returnKeyType="done"
+        />
+        <ButtonIcon icon="add" />
+      </Form>
     </Container>
   );
 }
