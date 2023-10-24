@@ -3,6 +3,17 @@ export type Team = {
   name: string;
 };
 
+export enum TeamSide {
+  Home = 'home',
+  Away = 'away',
+}
+
+export type Player = {
+  id: string;
+  name: string;
+  side: TeamSide;
+};
+
 export type RootStackParamList = {
   teams: undefined;
   create: undefined;
