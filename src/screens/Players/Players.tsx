@@ -10,6 +10,8 @@ import { Highlight } from '@components/Highlight';
 import { Input } from '@components/Input';
 import { ButtonIcon } from '@components/ButtonIcon';
 import { Filter } from '@components/Filter';
+import { PlayerCard } from '@components/PlayerCard';
+import { ListEmptyItem } from '@components/ListEmptyItem';
 
 import { Container, Form, HeaderList, NumberOfPlayers } from './styles';
 
@@ -57,6 +59,22 @@ export default function Players() {
 
         <NumberOfPlayers>{players.length}</NumberOfPlayers>
       </HeaderList>
+
+      <FlatList
+        data={players}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <PlayerCard name={item.name} onRemove={() => {}} />
+        )}
+        ListEmptyComponent={() => (
+          <ListEmptyItem message="This team has no registered players" />
+        )}
+        contentContainerStyle={[
+          { paddingBottom: 100 },
+          players.length === 0 && { flex: 1 },
+        ]}
+      />
     </Container>
   );
 }
