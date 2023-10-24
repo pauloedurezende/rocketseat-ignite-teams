@@ -12,6 +12,7 @@ import { ButtonIcon } from '@components/ButtonIcon';
 import { Filter } from '@components/Filter';
 import { PlayerCard } from '@components/PlayerCard';
 import { ListEmptyItem } from '@components/ListEmptyItem';
+import { Button } from '@components/Button';
 
 import { Container, Form, HeaderList, NumberOfPlayers } from './styles';
 
@@ -75,6 +76,10 @@ export default function Players() {
           players.length === 0 && { flex: 1 },
         ]}
       />
+
+      <Button type="secondary" onPress={() => {}}>
+        Remove Team
+      </Button>
     </Container>
   );
 }
