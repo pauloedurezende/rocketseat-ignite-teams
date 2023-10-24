@@ -4,6 +4,8 @@ import type { RouteProp } from '@react-navigation/native';
 
 import { RootStackParamList } from '@types';
 
+import { Header } from '@components/Header';
+
 import { Container } from './styles';
 
 type PlayersScreenRouteProps = RouteProp<RootStackParamList, 'players'>;
@@ -15,7 +17,7 @@ export default function Players() {
 
   return (
     <Container>
-      <Text>Players - Screen - {team?.name}</Text>
+      <Header showBackButton />
     </Container>
   );
 }
