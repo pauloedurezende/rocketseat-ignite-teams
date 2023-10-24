@@ -5,6 +5,7 @@ import type { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@types';
 
 import { Header } from '@components/Header';
+import { Highlight } from '@components/Highlight';
 
 import { Container } from './styles';
 
@@ -18,6 +19,11 @@ export default function Players() {
   return (
     <Container>
       <Header showBackButton />
+
+      <Highlight
+        title={team?.name}
+        subtitle="Add your friends and separate between teams"
+      />
     </Container>
   );
 }
