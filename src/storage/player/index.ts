@@ -1,9 +1,11 @@
 import { create } from './create';
-import { getPlayersByTeam } from './get-players-by-team';
 import { getPlayersBySideAndTeam } from './get-players-by-side-and-team';
+import { getPlayersByTeam } from './get-players-by-team';
+import { remove } from './remove';
 
 export const player = {
   create,
-  getPlayersByTeam,
   getPlayersBySideAndTeam,
+  getPlayersByTeam,
+  remove,
 };
