@@ -17,12 +17,12 @@ export async function create(name: string) {
       throw new ApplicationError('Team already exists with this name.');
     }
 
-    const team = {
+    const newTeam = {
       id: nanoid(),
       name,
     };
 
-    const stringifiedTeam = JSON.stringify([...availableTeams, team]);
+    const stringifiedTeam = JSON.stringify([...availableTeams, newTeam]);
 
     await AsyncStorage.setItem(TEAM_COLLECTION, stringifiedTeam);
   } catch (error) {

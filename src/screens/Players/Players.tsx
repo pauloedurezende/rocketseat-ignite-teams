@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { Alert, FlatList } from 'react-native';
+import { useRef, useState } from 'react';
+import { Alert, FlatList, TextInput } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import type { RouteProp } from '@react-navigation/native';
 
 import { Player, RootStackParamList, TeamSide } from '@types';
 import { teams } from '@storage/teams';
+import { player } from '@storage/player';
 
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
@@ -16,10 +17,14 @@ import { ListEmptyItem } from '@components/ListEmptyItem';
 import { Button } from '@components/Button';
 
 import { Container, Form, HeaderList, NumberOfPlayers } from './styles';
+import { ApplicationError } from '@utils/application-error';
 
 type PlayersScreenRouteProps = RouteProp<RootStackParamList, 'players'>;
 
 export default function Players() {
+  const playerNameInputRef = useRef<TextInput>(null);
+
+  const [playerName, setPlayerName] = useState('');
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedTeamSide, setSelectedTeamSide] = useState(TeamSide.Home);
 
@@ -27,6 +32,35 @@ export default function Players() {
     params: { team },
   } = useRoute<PlayersScreenRouteProps>();
   const { navigate } = useNavigation();
+
+  async function handleNewPlayer() {
+    const trimmedPlayerName = playerName.trim();
+    const hasPlayerName = trimmedPlayerName.length > 0;
+
+    if (!hasPlayerName) {
+      return Alert.alert('Oops!', 'You must enter a valid player name');
+    }
+
+    try {
+      const data = {
+        name: trimmedPlayerName,
+        side: selectedTeamSide,
+      };
+
+      await player.create(data, team?.id);
+
+      playerNameInputRef.current?.blur();
+
+      setPlayerName('');
+    } catch (error) {
+      if (error instanceof ApplicationError) {
+        return Alert.alert('Oops!', error.message);
+      }
+
+      Alert.alert('Error', 'An error occurred while creating the player');
+      console.error(error);
+    }
+  }
 
   async function removeCurrentTeamAndNavigate() {
     try {
@@ -58,8 +92,12 @@ export default function Players() {
       <Form>
         <Input
           autoCorrect={false}
+          onChangeText={setPlayerName}
+          onSubmitEditing={handleNewPlayer}
           placeholder="Player Name"
+          ref={playerNameInputRef}
           returnKeyType="done"
+          value={playerName}
         />
         <ButtonIcon icon="add" />
       </Form>
