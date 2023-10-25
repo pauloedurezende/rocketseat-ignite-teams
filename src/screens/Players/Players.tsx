@@ -35,6 +35,17 @@ export default function Players() {
   } = useRoute<PlayersScreenRouteProps>();
   const { navigate } = useNavigation();
 
+  async function handleRemovePlayer(id: Player['id']) {
+    try {
+      await player.remove(id, team?.id);
+
+      fetchAllPlayersBasedOnSide();
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while removing the player');
+      console.error(error);
+    }
+  }
+
   async function fetchAllPlayersBasedOnSide() {
     try {
       setIsLoading(true);
@@ -152,7 +163,10 @@ export default function Players() {
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <PlayerCard name={item.name} onRemove={() => {}} />
+            <PlayerCard
+              name={item.name}
+              onRemove={() => handleRemovePlayer(item.id)}
+            />
           )}
           ListEmptyComponent={() => (
             <ListEmptyItem message="This team has no registered players" />
