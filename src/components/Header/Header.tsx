@@ -5,10 +5,10 @@ import LogotypeImage from '@assets/logo.png';
 import { Container, Logo, Button, Icon } from './styles';
 
 type HeaderProps = {
-  showBackButton?: boolean;
+  showBackButton: boolean;
 };
 
-export default function Header({ showBackButton }: HeaderProps) {
+export default function Header({ showBackButton = false }: HeaderProps) {
   const { navigate } = useNavigation();
 
   return (

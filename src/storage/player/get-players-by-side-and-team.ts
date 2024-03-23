@@ -5,12 +5,8 @@ export async function getPlayersBySideAndTeam(
   side: TeamSide,
   team: Team['id'],
 ) {
-  try {
-    const storage = await getPlayersByTeam(team);
-    const players = storage.filter((item) => item.side === side);
+  const storage = await getPlayersByTeam(team);
+  const players = storage.filter((item) => item.side === side);
 
-    return players;
-  } catch (error) {
-    throw error;
-  }
+  return players;
 }

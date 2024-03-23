@@ -35,6 +35,24 @@ export default function Players() {
   } = useRoute<PlayersScreenRouteProps>();
   const { navigate } = useNavigation();
 
+  async function fetchAllPlayersBasedOnSide() {
+    try {
+      setIsLoading(true);
+
+      const result = await player.getPlayersBySideAndTeam(
+        selectedTeamSide,
+        team?.id,
+      );
+
+      setPlayers(result);
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while fetching the players');
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   async function handleRemovePlayer(id: Player['id']) {
     try {
       await player.remove(id, team?.id);
@@ -43,24 +61,6 @@ export default function Players() {
     } catch (error) {
       Alert.alert('Error', 'An error occurred while removing the player');
       console.error(error);
-    }
-  }
-
-  async function fetchAllPlayersBasedOnSide() {
-    try {
-      setIsLoading(true);
-
-      const players = await player.getPlayersBySideAndTeam(
-        selectedTeamSide,
-        team?.id,
-      );
-
-      setPlayers(players);
-    } catch (error) {
-      Alert.alert('Error', 'An error occurred while fetching the players');
-      console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -92,6 +92,8 @@ export default function Players() {
       Alert.alert('Error', 'An error occurred while creating the player');
       console.error(error);
     }
+
+    return null;
   }
 
   async function removeCurrentTeamAndNavigate() {
