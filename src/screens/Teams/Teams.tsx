@@ -53,9 +53,11 @@ export default function Teams() {
             onPress={() => navigate('players', { team })}
           />
         )}
-        ListEmptyComponent={() => (
-          <ListEmptyItem message="How about registering the first team?" />
-        )}
+        ListEmptyComponent={() => {
+          return (
+            <ListEmptyItem message="How about registering the first team?" />
+          );
+        }}
       />
 
       <Button onPress={() => navigate('create')}>Create New Team</Button>

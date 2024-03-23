@@ -9,8 +9,8 @@ import { Input } from '@components/Input';
 
 import { teams } from '@storage/teams';
 
-import { Container, Content, Icon } from './styles';
 import { ApplicationError } from '@utils/application-error';
+import { Container, Content, Icon } from './styles';
 
 export default function CreateTeam() {
   const [teamName, setTeamName] = useState('');
